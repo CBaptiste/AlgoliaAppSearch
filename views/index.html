@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" ng-app="appStore">
+  <head>
+        <meta charset="utf-8">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type='text/css' />
+        <link href="http://cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css" rel="stylesheet" type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css' />
+        <link href="../build/style.css" rel="stylesheet" type="text/css" />
+        <script src="../build/modules.js"></script>
+  </head>
+  <body class="body" ng-controller ="controller">
+      <div class="menu-container">
+          <div class="searchbox-container" >
+              <input class="form-control input-invisible" id="pac-input" ng-model="searchbox" type="text" placeholder="{{placeholder}}" autofocus/>
+          </div> 
+          <div class="menu-filters">
+              <div ng-repeat="categoryItem in filters.category | orderBy: 'id'" class="box shadow animated flipInY" ng-class="{'active': categoryItem.selected, 'delay1': $index%2, 'delay2': $index%3 }" ng-click="selectFilter(categoryItem)">
+                  <span class="badge-category"> {{ categoryItem.total }}</span>
+                  <h6 class="category-name" ng-bind-html="categoryItem.id"></h6>
+              </div>
+          </div>
+          <span class="rankSort" ng-click="changeRankSort()"> rank 
+            <span class="glyphicon" ng-class="{'glyphicon-arrow-up': filters.ascendantSort, 'glyphicon-arrow-down': !filters.ascendantSort }"></span>
+          </span>
+      </div> 
+      <div ng-show='loaded' class="result-container" >
+          <div class="app-container">
+              <div class="result" ng-repeat="hit in results.hits" ng-click="go(hit.link)">
+                  <span class="rank"> {{hit.rank}} <span ng-if="hit.rank <= 10" class="glyphicon glyphicon-star"></span>
+                  </span>
+                  <div class= "img-container" id="{{ hit.objectID }}">
+                  </div>
+                  <div class="result-name">
+                      <span ng-bind-html="hit._highlightResult.name.value"></span>
+                  </div>
+              </div>
+          </div>
+        <div class="result-pagination">
+            <span class="glyphicon glyphicon-arrow-left" ng-show="filters.page" ng-click="previous()"></span>
+            <span class="glyphicon glyphicon-arrow-right"ng-show="!(filters.page === nbPages) && (nbPages - 1)" ng-click="next()" ></span>
+        </div>
+      </div>
+      <br/>
+  </body>
+</html>
