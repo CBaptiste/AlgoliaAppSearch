@@ -36,7 +36,7 @@
           </div>
         <div class="result-pagination">
             <span class="glyphicon glyphicon-arrow-left" ng-show="filters.page" ng-click="previous()"></span>
-            <span class="glyphicon glyphicon-arrow-right"ng-show="!(filters.page === (nbPages-1)|| nbPages - 1 === 0)" ng-click="next()" ></span>
+            <span class="glyphicon glyphicon-arrow-right"ng-show="!(filters.page === (nbPages-1) || nbPages - 1 === 0) && results.hits.length" ng-click="next()" ></span>
         </div>
       </div>
       <br/>
