@@ -1,6 +1,6 @@
 # High responsive app store search using Algolia
 
-This small webpage shows the high responsivness of algolia's search. A miniature MVC framework was implemented.
+This small webpage shows the high responsivness of algolia's search. A miniature 3 pages MVC framework was implemented.
 Powered with Algolia, AngularJS and NodeJS
 
 # TL;DR
@@ -12,8 +12,8 @@ Powered with Algolia, AngularJS and NodeJS
 - category combination search
 - 3 files MVC back end
 
-#### Bad Parts
-- Angular's `ng-repeat` not the best choice for fast DOM update apparently: I cannot get rid of the 200ms white blank when switching images
+#### "room for improvements" Parts
+- Thanks to this exercise, I found out that Angular's `ng-repeat` is maybe not the most optimized way for fast DOM reload
 - Issues (see below) : could not get `facets` from JSON answers
 - The UI can certainely be better
 - responsiveness
@@ -37,7 +37,7 @@ Powered with Algolia, AngularJS and NodeJS
 ```Gruntfile.js  ```  
 ```package.json ```  
 ```server.js ```  
-It is a small sized project. For  single app app, I precognized feature based architecture for the ```public/``` folder.
+It is a small sized project. For  single page app, I precognized feature based architecture for the ```public/``` folder.
 
 ## Algolia
 #### Data
@@ -95,9 +95,9 @@ As a workaround, I recursively fetched all the products from the browse method t
 ```Express v4.13.3  ```  
 ```Mocha v2.3.4  ``` for tests  
 #### End points
-`GET / (200 OK or 404 NOTFOUND)` render the HTML page  
-`POST /api/1/apps (201 CREATED or 401 NOT MODIFIED) ` Add an app (as a JSON object) to the Algolia apps index and return its id  
-`DELETE /api/1/apps/:id (200 OK CREATED or 204 NO CONTENT)` delete an app from the store
+`GET / ` (200 OK or 404 NOTFOUND) render the HTML page  
+`POST /api/1/apps` (201 CREATED or 401 NOT MODIFIED) Add an app (as a JSON object) to the Algolia apps index and return its id  
+`DELETE /api/1/apps/:id` (200 OK CREATED or 204 NO CONTENT) delete an app from the store
 
 ## Front end
 #### Tech stack
