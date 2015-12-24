@@ -93,6 +93,7 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
         //refresh when search changes
         $scope.$watch('searchbox', function(newval, oldval){
             if(!angular.equals(newval,oldval)) refresh();
+        }, true);
         //refresh when filter changes
         $scope.$watch('filters', function(newval, oldval){
             if(!angular.equals(newval,oldval)) refresh();
