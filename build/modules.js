@@ -33443,7 +33443,7 @@ var ngSanitize = require('angular-sanitize');
 
 var _ = require('underscore');
 
-function Controller($scope, $filter, $sce, $window, $timeout, $http, appResource, queryHelper, clientConfig) { 
+function Controller($scope, $filter, $sce, $window, $timeout, appResource, queryHelper, clientConfig) { 
 
     'use strict';
 
@@ -33496,53 +33496,8 @@ function Controller($scope, $filter, $sce, $window, $timeout, $http, appResource
         $scope.filters.page++;
     };
 
+    //start loading
     browseAll(null);
-
-
-    
-    /**
-    * triggered when filters or searchbox changes. Fetch a new dataset from Algolia
-    */
-    function refresh(){        
-        appResource.searchByName({ 
-            query : $scope.searchbox, 
-            facetFilters: queryHelper.getFacetFilters($scope.filters, facets), 
-            hitsPerPage: 15, 
-            page: $scope.filters.page, 
-            indexSource: queryHelper.chooseSource($scope.filters.ascendantSort) 
-        }).$promise
-            .then(function searchSuccess(content) {
-                $scope.results = content;
-                $scope.nbPages = content.nbPages;
-
-                //little trick to improve a liitle bit the DOM image refresh effect on user 
-                //and prevents picture from loading from top to bottom
-
-                $scope.results.hits.map(function(hit) {
-                    //$timeout 0 triggered when DOM loaded so we can appendChild
-                    $timeout(function(){
-                        var img = getImage(hit);
-                        document.getElementById(hit.objectID).appendChild(img);
-                    },0);
-                });
-
-            });
-    }
-    
-    /**
-    * Create a new DOM image
-    * @param url string {string}
-    *@returns DOM node
-    */
-    function getImage(hit) {
-        var img = new Image(30,30); 
-        //to make sure that the image is displayed only when it is fully loaded           
-        img.onload = function(){ img.style.visibility = 'visible'; }; 
-        img.src = hit.image || $scope.fake;
-        img.style.visibility = 'hidden';
-        return img;
-    }
-
         
     /**
     * recursive function to get apps and categories
@@ -33581,12 +33536,56 @@ function Controller($scope, $filter, $sce, $window, $timeout, $http, appResource
         //refresh when search changes
         $scope.$watch('searchbox', function(newval, oldval){
             if(!angular.equals(newval,oldval)) refresh();
-        });
-        //changes when filter changes
+        }, true);
+        //refresh when filter changes
         $scope.$watch('filters', function(newval, oldval){
             if(!angular.equals(newval,oldval)) refresh();
         }, true);
+
         $scope.loaded = true;
+    }
+
+    /**
+    * triggered when filters or searchbox changes. Fetch a new dataset from Algolia
+    */
+    function refresh(){        
+        appResource.searchByName({ 
+            query : $scope.searchbox, 
+            facetFilters: queryHelper.getFacetFilters($scope.filters, facets), 
+            hitsPerPage: 15, 
+            page: $scope.filters.page, 
+            indexSource: queryHelper.chooseSource($scope.filters.ascendantSort) 
+        }).$promise
+            .then(function searchSuccess(content) {
+                $scope.results = content;
+                $scope.nbPages = content.nbPages;
+
+                //little trick to improve a liitle bit the DOM image refresh effect on user 
+                //and prevents picture from loading from top to bottom
+
+                $scope.results.hits.map(function(hit) {
+                    //$timeout 0 triggered when DOM loaded so we can getElementById
+                    $timeout(function(){
+                        var img = getImage(hit);
+                        document.getElementById(hit.objectID).appendChild(img);
+                    },0);
+                });
+
+            });
+    }
+    
+    /**
+    * Create a new DOM image
+    * @param url string {string}
+    *@returns DOM node
+    */
+    function getImage(hit) {
+        var img = new Image(30,30); 
+        //to make sure that the image is displayed only when it is fully loaded           
+        img.onload = function(){ img.style.visibility = 'visible'; }; 
+        img.src = hit.image || $scope.fake;
+        img.style.visibility = 'hidden';
+        return img;
     }
 }
 
@@ -33624,5 +33623,5 @@ function Service($resource, clientConfig){
 }
 
 module.exports = Service;
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_2eb7c03a.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_cc9f02a9.js","/")
 },{"angular":6,"angular-resource":2,"angular-sanitize":4,"buffer":7,"oMfpAn":10,"underscore":11}]},{},[12])

@@ -72,7 +72,6 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
                 } 
           });
     }
-
     
     /**
     * populate the scope from all the apps
