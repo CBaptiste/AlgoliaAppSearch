@@ -71,7 +71,10 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
 			refresh();
 			//refresh when search changes
 			$scope.$watch('searchbox', function(newval, oldval){
-				if(!angular.equals(newval,oldval)) refresh();
+				if(!angular.equals(newval,oldval)){
+					$scope.filters.page = 0;
+					refresh();
+				}
 			}, true);
 			//refresh when filter changes
 			$scope.$watch('filters', function(newval, oldval){
@@ -85,7 +88,7 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
     /**
     * triggered when filters or searchbox changes. Fetch a new dataset from Algolia
     */
-    function refresh(){        
+    function refresh(){
         appResource.searchByName({ 
             query : $scope.searchbox, 
             facetFilters: queryHelper.getFacetFilters($scope.filters, facets), 

@@ -31962,7 +31962,10 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
 			refresh();
 			//refresh when search changes
 			$scope.$watch('searchbox', function(newval, oldval){
-				if(!angular.equals(newval,oldval)) refresh();
+				if(!angular.equals(newval,oldval)){
+					$scope.filters.page = 0;
+					refresh();
+				}
 			}, true);
 			//refresh when filter changes
 			$scope.$watch('filters', function(newval, oldval){
@@ -31976,7 +31979,7 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
     /**
     * triggered when filters or searchbox changes. Fetch a new dataset from Algolia
     */
-    function refresh(){        
+    function refresh(){
         appResource.searchByName({ 
             query : $scope.searchbox, 
             facetFilters: queryHelper.getFacetFilters($scope.filters, facets), 
@@ -32052,5 +32055,5 @@ function Service($resource, clientConfig){
 }
 
 module.exports = Service;
-}).call(this,require("ngpmcQ"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_52bc69d4.js","/")
+}).call(this,require("ngpmcQ"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_f0e60d35.js","/")
 },{"angular":6,"angular-resource":2,"angular-sanitize":4,"buffer":7,"ngpmcQ":10}]},{},[11])
