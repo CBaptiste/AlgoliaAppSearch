@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); 
 
+//routes
 app.post('/api/1/apps', controller.create);
 app.delete('/api/1/apps/:id', controller.delete);
 

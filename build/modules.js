@@ -33447,21 +33447,13 @@ function Controller($scope, $filter, $sce, $window, $timeout, $http, appResource
 
     'use strict';
 
-    var totalIndex;
-    //the search with the GET parameter facetFilters is dynamic via this explicit list, in the queryHelper
+    //the search with the GET parameter facetFilters is dynamic via this explicit list
     var facets = ['category'];
+    var totalIndex;
 
     $scope.fake = "../public/img/fake.png"; // fake image for image-less data
     $scope.filters = { ascendantSort : true, page: 0 }; //anytime this model is changed, the results will be updated
     $scope.loaded = false;
-
-    $scope.add = function(){
-      var mock = { objectID : "123456", name: "titi", rank: 23, image: "", link: "" };
-        $http.post('/api/1/apps', { data: mock })
-          .then(function(data){
-            var test = "";
-          });
-    }
 
     /**
     * Select or deselect a category filter
@@ -33632,5 +33624,5 @@ function Service($resource, clientConfig){
 }
 
 module.exports = Service;
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_fc837e66.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_2eb7c03a.js","/")
 },{"angular":6,"angular-resource":2,"angular-sanitize":4,"buffer":7,"oMfpAn":10,"underscore":11}]},{},[12])

@@ -14,7 +14,6 @@ module.exports = {
 	},
 
 	delete: function(request, httpResponse){
-		
 		var id = request.params['id'];
 		AlgoliaService.delete(id, function(data){
 			httpResponse.status(200);
