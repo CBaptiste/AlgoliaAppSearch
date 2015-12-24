@@ -2,11 +2,16 @@ describe('Test controller', function() {
     var scope, $httpBackend, $filter, $q, $sce, $window, appResource, queryHelper, clientConfig, _, controller, mockAlgoliaResponse, defered;
 
     mockAlgoliaResponse = {
-        hits: []
+        hits: [],
+		facets: { category: {} }
     };
-
+	clientConfigMock = {
+		indexes: {
+			master: 'toto'
+		}
+	};
     mockService = {
-        browseAll: function(){
+        getCategoriesAndNbHits: function(){
             defered = $q.defer();
             defered.resolve(mockAlgoliaResponse);
             return {
@@ -25,6 +30,7 @@ describe('Test controller', function() {
 
     beforeEach(module('appStore', function ($provide) {
         $provide.value('appResource', mockService);
+        $provide.value('clientConfig', clientConfigMock);
     }));
 
     beforeEach(inject(function ($rootScope, $controller, _$filter_, _$q_, _$sce_, _$window_, _appResource_) {

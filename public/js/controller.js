@@ -1,5 +1,3 @@
-var _ = require('underscore');
-
 function Controller($scope, $filter, $sce, $window, $timeout, appResource, queryHelper, clientConfig) { 
 
     'use strict';
@@ -54,51 +52,34 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
     };
 
     //start loading
-    browseAll(null);
-        
-    /**
-    * recursive function to get apps and categories
-    * @param algolia's browsing current cursor string {string}
-    */
-    function browseAll(cursor) {
-        appResource.browseAll({cursor: cursor}).$promise
-            .then(function(data){
-                if(!totalIndex) totalIndex = data.hits;
-                else  totalIndex = totalIndex.concat(data.hits);
-
-                if(totalIndex.length < data.nbHits) browseAll(data.cursor);
-                else if(totalIndex.length === data.nbHits){
-                  init(totalIndex);
-                } 
-          });
-    }
+    init();
     
     /**
     * populate the scope from all the apps
     */
-    function init(data) {
+    function init() {
+		appResource.getCategoriesAndNbHits({ indexSource: clientConfig.indexes.master }).$promise
+            .then(function(data){
+			var categories = [];
+			for(var i in data.facets.category){
+			  categories.push({ id: i, total: data.facets.category[i], selected: false });
+			}
+			$scope.placeholder = "look amongst the " + data.nbHits + " apps that we have !";
+			//must be called .category to match algolia's facets property's name
+			$scope.filters.category = categories;
 
-        var indexByCategories = _.countBy(data, 'category');
-        var categories = [];
-        for(var i in indexByCategories){
-          categories.push({ id: i, total: indexByCategories[i], selected: false });
-        }
+			refresh();
+			//refresh when search changes
+			$scope.$watch('searchbox', function(newval, oldval){
+				if(!angular.equals(newval,oldval)) refresh();
+			}, true);
+			//refresh when filter changes
+			$scope.$watch('filters', function(newval, oldval){
+				if(!angular.equals(newval,oldval)) refresh();
+			}, true);
 
-        $scope.placeholder = "look amongst the " + data.length + " apps that we have !";
-        //must be called .category to match algolia's facets property's name
-        $scope.filters.category = categories;
-
-        refresh();
-        //refresh when search changes
-        $scope.$watch('searchbox', function(newval, oldval){
-            if(!angular.equals(newval,oldval)) refresh();
-        }, true);
-        //refresh when filter changes
-        $scope.$watch('filters', function(newval, oldval){
-            if(!angular.equals(newval,oldval)) refresh();
-        }, true);
-
-        $scope.loaded = true;
+			$scope.loaded = true;
+        });
     }
 
     /**
@@ -108,7 +89,7 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
         appResource.searchByName({ 
             query : $scope.searchbox, 
             facetFilters: queryHelper.getFacetFilters($scope.filters, facets), 
-            hitsPerPage: 15, 
+            hitsPerPage: 16, 
             page: $scope.filters.page, 
             indexSource: queryHelper.chooseSource($scope.filters.ascendantSort) 
         }).$promise
@@ -123,7 +104,8 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
                     //$timeout 0 triggered when DOM loaded so we can getElementById
                     $timeout(function(){
                         var img = getImage(hit);
-                        document.getElementById(hit.objectID).appendChild(img);
+						if(!document.getElementById(hit.objectID).hasChildNodes())
+						document.getElementById(hit.objectID).appendChild(img);
                     },0);
                 });
 

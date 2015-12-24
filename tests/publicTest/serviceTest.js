@@ -11,10 +11,10 @@ describe('Service test', function() {
 
         it('should call BrowseAll', inject(function (appResource) {
             
-            $httpBackend.expectGET('https://0LM8552PMH-dsn.algolia.net/1/indexes/AppStore_master/browse?cursor=')
+            $httpBackend.expectGET('https://0LM8552PMH-dsn.algolia.net/1/indexes/AppStore_master?query=&distinct=1&facets=*')
                 .respond({ hits: [], nbPages: 2 });
 
-            var result = appResource.browseAll();
+            var result = appResource.getCategoriesAndNbHits({ indexSource: 'AppStore_master' });
             $httpBackend.flush();
             expect(result.nbPages).toBe(2);
         }));

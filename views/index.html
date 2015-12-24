@@ -28,8 +28,7 @@
               <div class="result" ng-repeat="hit in results.hits" ng-click="go(hit.link)">
                   <span class="rank"> {{hit.rank}} <span ng-if="hit.rank <= 10" class="glyphicon glyphicon-star"></span>
                   </span>
-                  <div class= "img-container" id="{{ hit.objectID }}">
-                  </div>
+                  <div class= "img-container" id="{{ hit.objectID }}"></div>
                   <div class="result-name">
                       <span ng-bind-html="hit._highlightResult.name.value"></span>
                   </div>

@@ -19,11 +19,11 @@ function Service($resource, clientConfig){
             },
             headers: clientConfig.httpAuthentificationHeader
         },
-        browseAll: {
+        getCategoriesAndNbHits: {
             method: "GET",
-            url: "https://" + clientConfig.appId + "-dsn.algolia.net/" + clientConfig.version + "/indexes/" + clientConfig.indexes.master + "/browse?cursor=:cursor",
+            url: "https://" + clientConfig.appId + "-dsn.algolia.net/" + clientConfig.version + "/indexes/:indexSource?query=:query&distinct=1&facets=*",
             params: {
-                cursor: '@cursor'
+                indexSource: '@indexSource'
             },
             headers: clientConfig.httpAuthentificationHeader
         }
