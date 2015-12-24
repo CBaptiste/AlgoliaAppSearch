@@ -10,7 +10,7 @@ Powered with Algolia, AngularJS and NodeJS
 - not the most beautiful UI but simple and effective
 - And the most important : I get what I look for
 - category combination search
-- Node for quick small sized back end
+- 3 files MVC back end
 
 #### Bad Parts
 - Angular's `ng-repeat` not the best choice for fast DOM update apparently: I cannot get rid of the 200ms white blank when switching images
