@@ -54,7 +54,7 @@ It is a small sized project. For  single page app, I precognized feature based a
 
 ##### indexes
 1 master (write)  
-2 slaves: desc(rank) and asc(rank)
+2 slaves (read): desc(rank) and asc(rank)
 
 ##### main settings
 main settings to have a nice app search experience
