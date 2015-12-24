@@ -97,7 +97,7 @@ As a workaround, I recursively fetched all the products from the browse method t
 #### End points
 `GET / ` (200 OK or 404 NOTFOUND) render the HTML page  
 `POST /api/1/apps` (201 CREATED or 401 NOT MODIFIED) Add an app (as a JSON object) to the Algolia apps index and return its id  
-`DELETE /api/1/apps/:id` (200 OK CREATED or 204 NO CONTENT) delete an app from the store
+`DELETE /api/1/apps/:id` (200 OK or 204 NO CONTENT) delete an app from the store
 
 ## Front end
 #### Tech stack
