@@ -14,7 +14,6 @@ Powered with Algolia, AngularJS and NodeJS
 
 #### "room for improvements" Parts
 - Thanks to this exercise, I found out that Angular's `ng-repeat` is maybe not the most optimized way for fast DOM reload
-- Issues (see below) : could not get `facets` from JSON answers
 - The UI can certainely be better
 - responsiveness
 
@@ -70,20 +69,6 @@ main settings to have a nice app search experience
 "highlightPostTag": "</b>",
 "restrictSearchableAttributes": "name"
 }
-```
-##### Issues
-
-It was impossible to get the facets info in the JSON from browse/ and search method even though the faceting is configured. (according to https://www.algolia.com/doc/faq/searching/how-to-display-the-count-for-the-facets)
-```
-"facets" : {
-  "category" : {
-    "Movies & TV Shows" : 85,
-    "Cell Phones" : 24,
-    "Headphones" : 24,
-    ...
-}
-```
-As a workaround, I recursively fetched all the products from the browse method to extract the categories.
 
 ##### Data Access
 ###### Back end : ``` npm install algoliasearch --save-dev ``` and then algolia's API
