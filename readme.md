@@ -20,7 +20,7 @@ Powered with Algolia, AngularJS and NodeJS
 
 
 ## Installation
-1. ```npm start server.js ```
+1. ```npm run start```
 2. go to ```localhost:3000```
 3. search !
 
