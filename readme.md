@@ -69,7 +69,7 @@ main settings to have a nice app search experience
 "highlightPostTag": "</b>",
 "restrictSearchableAttributes": "name"
 }
-
+```
 ##### Data Access
 ###### Back end : ``` npm install algoliasearch --save-dev ``` and then algolia's API
 ###### Front end : Algolia's REST API
