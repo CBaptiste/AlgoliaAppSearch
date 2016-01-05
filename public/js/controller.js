@@ -92,7 +92,7 @@ function Controller($scope, $filter, $sce, $window, $timeout, appResource, query
         appResource.searchByName({ 
             query : $scope.searchbox, 
             facetFilters: queryHelper.getFacetFilters($scope.filters, facets), 
-            hitsPerPage: 16, 
+            hitsPerPage: 15, 
             page: $scope.filters.page, 
             indexSource: queryHelper.chooseSource($scope.filters.ascendantSort) 
         }).$promise
