@@ -6,7 +6,7 @@ Powered with Algolia, AngularJS and NodeJS
 # TL;DR
 #### Good parts
 - high responsiveness
-- image display optimisation
+- images display optimisation
 - not the most beautiful UI but simple and effective
 - And the most important : I get what I look for
 - category combination search
