@@ -23,7 +23,7 @@
             <span class="glyphicon" ng-class="{'glyphicon-arrow-up': filters.ascendantSort, 'glyphicon-arrow-down': !filters.ascendantSort }"></span>
           </span>
       </div> 
-      <div ng-show='loaded' class="result-container" >
+      <span ng-show='loaded' class="result-container" >
           <div class="app-container">
               <div class="result" ng-repeat="hit in results.hits" ng-click="go(hit.link)">
                   <span class="rank"> {{hit.rank}} <span ng-if="hit.rank <= 10" class="glyphicon glyphicon-star"></span>
