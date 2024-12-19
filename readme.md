@@ -3,7 +3,28 @@
 This small webpage shows the high responsivness of algolia's search. A miniature 3 pages MVC framework was implemented.
 Powered with Algolia, AngularJS and NodeJS
 
-# TL;DR
+## Table of Contents
+- [TL;DR](#tldr)
+  - [Good parts](#good-parts)
+  - [Room for improvements Parts](#room-for-improvements-parts)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Algolia](#algolia)
+  - [Data](#data)
+  - [Algolia's index setting](#algolias-index-setting)
+- [Back end](#back-end)
+  - [Tech stack](#tech-stack)
+  - [End points](#end-points)
+- [Front end](#front-end)
+  - [Tech stack](#tech-stack-1)
+  - [Task runner](#task-runner)
+- [Todo](#todo)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+## TL;DR
 #### Good parts
 - high responsiveness
 - images display optimisation
@@ -17,11 +38,13 @@ Powered with Algolia, AngularJS and NodeJS
 - The UI can certainely be better
 - responsiveness
 
-
 ## Installation
 1. ```npm run start```
 2. go to ```localhost:3000```
 3. search !
+
+## Usage
+After installation, open your browser and navigate to `localhost:3000`. Use the search bar to find apps by name or category. The results will be displayed instantly, showcasing the high responsiveness of Algolia's search capabilities.
 
 ## Project Structure
 
@@ -99,9 +122,11 @@ main settings to have a nice app search experience
 `@todo` switch to react to analyze the DOM updates difference  
 `@todo` improve UI
 
+## Contributing
+We welcome contributions! Please fork the repository and submit a pull request for any enhancements or bug fixes. Ensure your code follows the project's coding standards and includes appropriate tests.
 
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-
-
-
-
+## Contact
+For further inquiries, please contact us at support@example.com. We appreciate your feedback and suggestions.
